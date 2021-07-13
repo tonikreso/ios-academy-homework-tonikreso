@@ -33,7 +33,6 @@
                                 <color key="backgroundColor" red="1" green="0.61225651271250692" blue="0.20082465969786353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="SLl-8q-Lbp"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="zb2-a5-fU0"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="label">

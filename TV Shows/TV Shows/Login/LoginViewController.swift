@@ -34,7 +34,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         labelView.text = "Please tap the button."
         labelView.layer.cornerRadius = 10
-        activityIndicatorView.startAnimating()
         createTimer()
     }
     

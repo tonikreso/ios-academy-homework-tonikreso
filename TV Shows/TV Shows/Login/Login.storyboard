@@ -62,8 +62,8 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicatorView" destination="c7u-xg-PLG" id="hpB-Gi-jG8"/>
-                        <outlet property="buttonView" destination="XEK-mL-gcB" id="joP-dp-jAk"/>
-                        <outlet property="labelView" destination="BYl-tk-yUD" id="YCx-Wz-XgK"/>
+                        <outlet property="counterButton" destination="XEK-mL-gcB" id="F4Z-XI-RWQ"/>
+                        <outlet property="counterLabel" destination="BYl-tk-yUD" id="ura-bA-ReZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

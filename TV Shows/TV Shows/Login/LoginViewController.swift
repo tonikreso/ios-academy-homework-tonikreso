@@ -8,13 +8,17 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
+    @IBOutlet private weak var counterButton: UIButton!
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
+    
     private var numberOfTaps = 0
     private var timer: Timer!
     
     @IBAction func buttonTouchUpInside(_ sender: Any) {
         numberOfTaps += 1
-        labelView.text = "The button has been tapped \(numberOfTaps) times!"
+        counterLabel.text = "The button has been tapped \(numberOfTaps) times!"
         
         //every time the button is pressed if indicator is spinning stop it,
         //if not, start spinning for 3 seconds
@@ -26,21 +30,18 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var buttonView: UIButton!
-    @IBOutlet weak var labelView: UILabel!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelView.text = "Please tap the button."
-        labelView.layer.cornerRadius = 10
+        setupTapCounterLabel()
         createTimer()
     }
     
     func createTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [self] timer in
-            activityIndicatorView  .stopAnimating()
-                   }
+        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
+            self?.activityIndicatorView.stopAnimating()
+        }
         activityIndicatorView.startAnimating()
     }
     
@@ -48,4 +49,10 @@ class LoginViewController: UIViewController {
         timer.invalidate()
         createTimer()
     }
+    
+    func setupTapCounterLabel() {
+        counterLabel.text = "Please tap the button."
+        counterLabel.layer.cornerRadius = 10
+    }
+    
 }

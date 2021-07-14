@@ -14,7 +14,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     private var numberOfTaps = 0
-    private var timer: Timer!
+    private var stopActivityIndicatorDispatch: DispatchWorkItem!
     
     @IBAction func buttonTouchUpInside(_ sender: Any) {
         numberOfTaps += 1
@@ -22,11 +22,10 @@ final class LoginViewController: UIViewController {
         
         //every time the button is pressed if indicator is spinning stop it,
         //if not, start spinning for 3 seconds
-        if timer.isValid {
-            timer.invalidate()
-            activityIndicatorView.stopAnimating()
+        if !stopActivityIndicatorDispatch.isCancelled {
+            stopAndCancelActivityIndicator()
         } else {
-            resetTimer()
+            createTimerAndShowActivityIndicator()
         }
     }
     
@@ -35,24 +34,30 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapCounterLabel()
-        createTimer()
+        createTimerAndShowActivityIndicator()
     }
     
-    func createTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
-            self?.activityIndicatorView.stopAnimating()
+    func createDispatchWorkItem() {
+        //create new DispatchWorkItem every time the countdown starts
+        stopActivityIndicatorDispatch = DispatchWorkItem { [weak self] in
+            self?.stopAndCancelActivityIndicator()
         }
-        activityIndicatorView.startAnimating()
     }
     
-    func resetTimer() {
-        timer.invalidate()
-        createTimer()
+    func createTimerAndShowActivityIndicator() {
+        createDispatchWorkItem()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: stopActivityIndicatorDispatch)
+        activityIndicatorView.startAnimating()
     }
     
     func setupTapCounterLabel() {
         counterLabel.text = "Please tap the button."
         counterLabel.layer.cornerRadius = 10
+    }
+    
+    func stopAndCancelActivityIndicator() {
+        stopActivityIndicatorDispatch.cancel()
+        activityIndicatorView.stopAnimating()
     }
     
 }

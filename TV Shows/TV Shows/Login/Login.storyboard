@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYl-tk-yUD">
-                                <rect key="frame" x="82" y="436.5" width="250" height="23.5"/>
+                                <rect key="frame" x="82" y="506.5" width="250" height="23.5"/>
                                 <color key="backgroundColor" red="1" green="0.61225651271250692" blue="0.20082465969786353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="SLl-8q-Lbp"/>
@@ -45,7 +45,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="c7u-xg-PLG">
-                                <rect key="frame" x="188.5" y="324" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="369.5" width="37" height="37"/>
                                 <color key="color" red="1" green="0.58431372550000005" blue="0.20082465969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -53,11 +53,11 @@
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstItem="BYl-tk-yUD" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0bt-Cj-1Fo"/>
+                            <constraint firstItem="c7u-xg-PLG" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="-60" id="5tJ-JO-s04"/>
                             <constraint firstItem="XEK-mL-gcB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="7R7-DZ-kF1"/>
-                            <constraint firstItem="BYl-tk-yUD" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="I9q-1K-ji8"/>
-                            <constraint firstItem="c7u-xg-PLG" firstAttribute="top" secondItem="XEK-mL-gcB" secondAttribute="bottom" constant="80" id="UIU-cw-GOf"/>
                             <constraint firstItem="c7u-xg-PLG" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="bvS-TS-g4h"/>
                             <constraint firstItem="XEK-mL-gcB" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hJb-XF-kjK"/>
+                            <constraint firstItem="BYl-tk-yUD" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="70" id="jLq-ev-zvn"/>
                         </constraints>
                     </view>
                     <connections>

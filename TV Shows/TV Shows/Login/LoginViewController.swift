@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     @IBOutlet private weak var counterButton: UIButton!
     @IBOutlet private weak var counterLabel: UILabel!
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!

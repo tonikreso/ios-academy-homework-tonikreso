@@ -29,6 +29,8 @@ final class LoginViewController: UIViewController {
     }
     
     private func setupButtons() {
+        loginButton.isEnabled = false
+        registerButton.isEnabled = false
         loginButton.layer.cornerRadius = 25
         loginButton.setTitleColor(.lightText, for: .normal)
         registerButton.setTitleColor(.lightText, for: .normal)
@@ -77,6 +79,9 @@ extension LoginViewController: UITextFieldDelegate {
             //delegates are removed so code doesn't run for nothing
             emailTextField.delegate = nil
             passwordTextField.delegate = nil
+            
+            loginButton.isEnabled = true
+            registerButton.isEnabled = true
             
             loginButton.backgroundColor = .white
             let color = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)

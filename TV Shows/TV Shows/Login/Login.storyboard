@@ -16,20 +16,9 @@
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7lM-L2-As9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="EgU-uW-TEi">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="87w-ev-xea">
-                                        <rect key="frame" x="212" y="0.0" width="202" height="250"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="P6c-Dp-iC5"/>
-                                </constraints>
-                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="87w-ev-xea">
+                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6n-3c-9Ng">
                                 <rect key="frame" x="0.0" y="110" width="414" height="786"/>
                                 <subviews>
@@ -149,23 +138,26 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="1x5-ze-IVz"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="yvW-cI-SuD"/>
                             </scrollView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="EgU-uW-TEi">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.32156862745098036" green="0.21176470588235294" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="87w-ev-xea" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="5R3-4I-6rL"/>
                             <constraint firstAttribute="bottom" secondItem="Y6n-3c-9Ng" secondAttribute="bottom" id="Dz5-PS-N90"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="110" id="FCN-EF-nJ8"/>
-                            <constraint firstItem="7lM-L2-As9" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Tfi-bd-Kln"/>
+                            <constraint firstAttribute="trailing" secondItem="87w-ev-xea" secondAttribute="trailing" id="T0G-TL-fp8"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Vqp-uS-6eW"/>
-                            <constraint firstItem="7lM-L2-As9" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="Xfg-Yp-1Oh"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="kGc-Nr-1MG"/>
-                            <constraint firstItem="7lM-L2-As9" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="rlt-2A-APT"/>
+                            <constraint firstItem="EgU-uW-TEi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="m1E-XL-6ft"/>
+                            <constraint firstItem="EgU-uW-TEi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="p7D-vZ-s5R"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailLineView" destination="gI6-7B-mKd" id="fdP-3u-djn"/>
                         <outlet property="emailTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
-                        <outlet property="horizontalStackView" destination="7lM-L2-As9" id="wqu-vT-5sX"/>
                         <outlet property="loginButton" destination="Ump-JV-CNx" id="kAD-6g-8Qz"/>
                         <outlet property="passwordLineView" destination="VgM-2r-Ogi" id="3lM-JG-D9E"/>
                         <outlet property="passwordTextField" destination="JgF-no-5Ui" id="tcB-nb-fBx"/>

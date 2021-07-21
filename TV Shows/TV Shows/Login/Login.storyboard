@@ -122,6 +122,9 @@
                                                         <state key="normal" title="Login">
                                                             <color key="titleColor" white="0.75082376700680276" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="loginAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ilf-fy-vbH"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mk7-2N-OCw">
                                                         <rect key="frame" x="0.0" y="61" width="374" height="50"/>
@@ -132,6 +135,9 @@
                                                         <state key="normal" title="Register">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="registerAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aUl-Vc-F0q"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

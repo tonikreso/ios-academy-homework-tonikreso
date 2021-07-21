@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="H2T-FE-7WP">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="H2T-FE-7WP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="enb-kZ-fVy">
@@ -34,6 +34,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="H2T-FE-7WP" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-44" id="I3H-vn-59j"/>
                             <constraint firstItem="H2T-FE-7WP" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="LLL-1w-2I6"/>
                             <constraint firstItem="xxt-DW-4im" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MQw-6X-grr"/>
                             <constraint firstAttribute="trailing" secondItem="H2T-FE-7WP" secondAttribute="trailing" id="Nfe-cK-euB"/>

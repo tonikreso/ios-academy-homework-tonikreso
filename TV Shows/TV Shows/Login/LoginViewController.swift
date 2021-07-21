@@ -20,6 +20,15 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
+    @IBAction func loginAction() {
+        
+    }
+    
+    @IBAction func registerAction() {
+        let vc = HomeViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     private var passwordButton: UIButton!
     
     override func viewDidLoad() {

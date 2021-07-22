@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Vu-Tk-Gk3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,6 +9,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Jtf-yl-HA6">
+            <objects>
+                <navigationController id="1Vu-Tk-Gk3" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aLv-wW-NpW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="QA6-Mv-MwB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhy-sJ-M63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1172" y="125"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -16,20 +33,9 @@
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7lM-L2-As9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="EgU-uW-TEi">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="87w-ev-xea">
-                                        <rect key="frame" x="212" y="0.0" width="202" height="250"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="P6c-Dp-iC5"/>
-                                </constraints>
-                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-right" translatesAutoresizingMaskIntoConstraints="NO" id="87w-ev-xea">
+                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6n-3c-9Ng">
                                 <rect key="frame" x="0.0" y="110" width="414" height="786"/>
                                 <subviews>
@@ -155,23 +161,27 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="1x5-ze-IVz"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="yvW-cI-SuD"/>
                             </scrollView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="EgU-uW-TEi">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.32156862745098036" green="0.21176470588235294" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Y6n-3c-9Ng" secondAttribute="bottom" id="Dz5-PS-N90"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="110" id="FCN-EF-nJ8"/>
-                            <constraint firstItem="7lM-L2-As9" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Tfi-bd-Kln"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Vqp-uS-6eW"/>
-                            <constraint firstItem="7lM-L2-As9" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="Xfg-Yp-1Oh"/>
+                            <constraint firstAttribute="trailing" secondItem="87w-ev-xea" secondAttribute="trailing" id="fBW-bk-dIg"/>
+                            <constraint firstItem="87w-ev-xea" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="jnN-IU-KZL"/>
+                            <constraint firstItem="EgU-uW-TEi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="jqo-ti-S9y"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="kGc-Nr-1MG"/>
-                            <constraint firstItem="7lM-L2-As9" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="rlt-2A-APT"/>
+                            <constraint firstItem="EgU-uW-TEi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="zig-ux-sSX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9mg-Nj-ZTh"/>
                     <connections>
                         <outlet property="emailLineView" destination="gI6-7B-mKd" id="fdP-3u-djn"/>
                         <outlet property="emailTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
-                        <outlet property="horizontalStackView" destination="7lM-L2-As9" id="wqu-vT-5sX"/>
                         <outlet property="loginButton" destination="Ump-JV-CNx" id="kAD-6g-8Qz"/>
                         <outlet property="passwordLineView" destination="VgM-2r-Ogi" id="3lM-JG-D9E"/>
                         <outlet property="passwordTextField" destination="JgF-no-5Ui" id="tcB-nb-fBx"/>
@@ -182,7 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23.188405797101453" y="37.5"/>
+            <point key="canvasLocation" x="-191" y="112"/>
         </scene>
     </scenes>
     <designables>

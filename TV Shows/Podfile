@@ -6,5 +6,6 @@ target 'TV Shows' do
   use_frameworks!
 
   # Pods for TV Shows
+  pod "Alamofire"
   pod "SVProgressHUD"
 end

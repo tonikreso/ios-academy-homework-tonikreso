@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 final class LoginViewController: UIViewController {
     
@@ -20,21 +21,69 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
-    @IBAction func loginAction() {
-        
-    }
-    
-    @IBAction func registerAction() {
-        let vc = HomeViewController()
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     private var passwordButton: UIButton!
     
+    @IBAction private func loginAction() {
+        SVProgressHUD.show()
+        
+        //in the future when returning to login screen will be disabled
+        //loginButton.isEnabled = false
+        
+        NetworkService.shared().service.request(Router.login(user: UserLogin(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")))
+            .validate()
+            .responseDecodable(of: LoginResponse.self) { response in
+                switch response.result {
+                case .success(_):
+                        SVProgressHUD.showSuccess(withStatus: "Success")
+                case .failure(_):
+                        SVProgressHUD.showError(withStatus: "Failure")
+                }
+                SVProgressHUD.dismiss(withDelay: 1) { [weak self] in
+                    self?.navigateToHomeViewController()
+                }
+            }
+    }
+    
+    @IBAction private func registerAction() {
+        SVProgressHUD.show()
+        
+        //in the future when returning to login screen will be disabled
+        //registerButton.isEnabled = false
+        
+        NetworkService.shared().service.request(Router.register(user: UserRegister(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", passwordConfirmation: passwordTextField.text ?? "")))
+            .validate()
+            .responseDecodable(of: LoginResponse.self) { response in
+                switch response.result {
+                case .success(let user):
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                case .failure(let error):
+                    SVProgressHUD.showError(withStatus: "Failure")
+                }
+                SVProgressHUD.dismiss(withDelay: 1) { [weak self] in
+                    self?.navigateToHomeViewController()
+                }
+            }
+    }
+    
+    @IBAction private func refreshPasswordVisibility(_ sender: Any) {
+        passwordTextField.isSecureTextEntry.toggle()
+        if passwordTextField.isSecureTextEntry {
+            passwordButton.setImage(UIImage(named: "visibility-icon-open"), for: .normal)
+        } else {
+            passwordButton.setImage(UIImage(named: "visibility-icon-closed"), for: .normal)
+        }
+    }
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
+        makeNavigationBarClear()
         setupTextFields()
         setupButtons()
-        
+    }
+    
+    private func makeNavigationBarClear() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     private func setupButtons() {
@@ -59,7 +108,7 @@ final class LoginViewController: UIViewController {
         passwordTextField.delegate = self
     }
     
-    @IBAction func rememberMeAction(_ sender: Any) {
+    @IBAction private func rememberMeAction(_ sender: Any) {
         if rememberMeButton.tag == 0 {
             rememberMeButton.tag = 1
             rememberMeButton.setImage( UIImage(named: "ic-checkbox-selected"), for: .normal)
@@ -68,14 +117,13 @@ final class LoginViewController: UIViewController {
             rememberMeButton.setImage( UIImage(named: "ic-checkbox-unselected"), for: .normal)
         }
     }
-    @IBAction func refreshPasswordVisibility(_ sender: Any) {
-        passwordTextField.isSecureTextEntry.toggle()
-        if passwordTextField.isSecureTextEntry {
-            passwordButton.setImage(UIImage(named: "visibility-icon-open"), for: .normal)
-        } else {
-            passwordButton.setImage(UIImage(named: "visibility-icon-closed"), for: .normal)
-        }
+    
+    private func navigateToHomeViewController() {
+        let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
+        let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeViewController
+        self.navigationController?.pushViewController(homeVC, animated: true)
     }
+    
     
 }
 

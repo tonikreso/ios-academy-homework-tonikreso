@@ -10,7 +10,6 @@ import UIKit
 
 final class LoginViewController: UIViewController {
     
-    @IBOutlet private weak var horizontalStackView: UIStackView!
     @IBOutlet private weak var verticalStackView: UIStackView!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!

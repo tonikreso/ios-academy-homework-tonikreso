@@ -112,7 +112,7 @@
                                                 <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="Remember me" image="ic-checkbox-unselected"/>
                                                 <connections>
-                                                    <action selector="rememberMeAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gnd-T9-TaF"/>
+                                                    <action selector="rememberMeButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gnd-T9-TaF"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-a2-CFS">
@@ -129,7 +129,7 @@
                                                             <color key="titleColor" white="0.75082376700680276" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="loginAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ilf-fy-vbH"/>
+                                                            <action selector="loginButtonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ilf-fy-vbH"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mk7-2N-OCw">
@@ -142,7 +142,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="registerAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aUl-Vc-F0q"/>
+                                                            <action selector="registerButtonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aUl-Vc-F0q"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -181,13 +181,12 @@
                     <navigationItem key="navigationItem" id="9mg-Nj-ZTh"/>
                     <connections>
                         <outlet property="emailLineView" destination="gI6-7B-mKd" id="fdP-3u-djn"/>
-                        <outlet property="emailTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
                         <outlet property="loginButton" destination="Ump-JV-CNx" id="kAD-6g-8Qz"/>
                         <outlet property="passwordLineView" destination="VgM-2r-Ogi" id="3lM-JG-D9E"/>
                         <outlet property="passwordTextField" destination="JgF-no-5Ui" id="tcB-nb-fBx"/>
                         <outlet property="registerButton" destination="mk7-2N-OCw" id="pg3-gc-5UA"/>
                         <outlet property="rememberMeButton" destination="7Xb-ny-vTs" id="tKs-d9-x9S"/>
-                        <outlet property="verticalStackView" destination="xl5-zP-G2K" id="zhg-3h-KDc"/>
+                        <outlet property="usernameTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

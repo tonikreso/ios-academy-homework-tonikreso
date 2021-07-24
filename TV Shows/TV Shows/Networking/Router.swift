@@ -23,9 +23,7 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .login:
-            return .post
-        case .register:
+        case .login, .register:
             return .post
         }
     }
@@ -47,20 +45,16 @@ enum Router: URLRequestConvertible {
         }
     }
     
-    
     func asURLRequest() throws -> URLRequest {
        
-        let url = try URL(string: "https://tv-shows.infinum.academy/".asURL()
-                                                  .appendingPathComponent(path)
-                                                  .absoluteString.removingPercentEncoding!)
-        
-        var request = URLRequest.init(url: url!)
-        
-        request.httpMethod = method.rawValue
-        
-        request.timeoutInterval = TimeInterval(10*1000)
-        
-        return try URLEncoding.default.encode(request,with: parameters)
+        let url = try "https://tv-shows.infinum.academy/".asURL().appendingPathComponent(path)
+        var request = try URLRequest(url: url, method: method)
+        switch method {
+            case .post, .put, .patch:
+                request = try JSONEncoding.default.encode(request, with: parameters)
+            default:
+                request = try URLEncoding.default.encode(request, with: parameters)
+        }
+        return request
     }
-
 }

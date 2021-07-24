@@ -11,9 +11,7 @@ import SVProgressHUD
 
 final class LoginViewController: UIViewController {
     
-    @IBOutlet private weak var horizontalStackView: UIStackView!
-    @IBOutlet private weak var verticalStackView: UIStackView!
-    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var emailLineView: UIView!
     @IBOutlet private weak var passwordLineView: UIView!
@@ -23,127 +21,175 @@ final class LoginViewController: UIViewController {
     
     private var passwordButton: UIButton!
     
-    @IBAction private func loginAction() {
-        SVProgressHUD.show()
-        
-        //in the future when returning to login screen will be disabled
-        //loginButton.isEnabled = false
-        
-        NetworkService.shared().service.request(Router.login(user: UserLogin(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")))
-            .validate()
-            .responseDecodable(of: LoginResponse.self) { response in
-                switch response.result {
-                case .success(_):
-                        SVProgressHUD.showSuccess(withStatus: "Success")
-                case .failure(_):
-                        SVProgressHUD.showError(withStatus: "Failure")
-                }
-                SVProgressHUD.dismiss(withDelay: 1) { [weak self] in
-                    self?.navigateToHomeViewController()
-                }
-            }
-    }
-    
-    @IBAction private func registerAction() {
-        SVProgressHUD.show()
-        
-        //in the future when returning to login screen will be disabled
-        //registerButton.isEnabled = false
-        
-        NetworkService.shared().service.request(Router.register(user: UserRegister(email: emailTextField.text ?? "", password: passwordTextField.text ?? "", passwordConfirmation: passwordTextField.text ?? "")))
-            .validate()
-            .responseDecodable(of: LoginResponse.self) { response in
-                switch response.result {
-                case .success(let user):
-                    SVProgressHUD.showSuccess(withStatus: "Success")
-                case .failure(let error):
-                    SVProgressHUD.showError(withStatus: "Failure")
-                }
-                SVProgressHUD.dismiss(withDelay: 1) { [weak self] in
-                    self?.navigateToHomeViewController()
-                }
-            }
-    }
-    
-    @IBAction private func refreshPasswordVisibility(_ sender: Any) {
-        passwordTextField.isSecureTextEntry.toggle()
-        if passwordTextField.isSecureTextEntry {
-            passwordButton.setImage(UIImage(named: "visibility-icon-open"), for: .normal)
-        } else {
-            passwordButton.setImage(UIImage(named: "visibility-icon-closed"), for: .normal)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         makeNavigationBarClear()
         setupTextFields()
         setupButtons()
     }
+}
+
+// MARK: - IBActions
+
+private extension LoginViewController {
     
-    private func makeNavigationBarClear() {
+    @IBAction func rememberMeButtonPressed(_ sender: Any) {
+        rememberMeButton.isSelected.toggle()
+    }
+    
+    @IBAction func passwordButtonPressed(_ sender: Any) {
+        passwordTextField.isSecureTextEntry.toggle()
+        passwordButton.isSelected.toggle()
+    }
+    
+    @IBAction func loginButtonPressed() {
+        //in the future when returning to login screen will be disabled
+        //loginButton.isEnabled = false
+        
+        loginOrRegisterButtonPressed(errorDescription: "Login error") { username, password in
+            
+            let router = Router.login(
+                user: UserLogin(
+                    email: username,
+                    password: password
+                )
+            )
+            NetworkService
+                .shared
+                .service
+                .request(router)
+                .validate()
+                .responseDecodable(of: LoginResponse.self) { [weak self] response in
+                    switch response.result {
+                    case .success(_):
+                            SVProgressHUD.showSuccess(withStatus: "Success")
+                    case .failure(_):
+                            SVProgressHUD.showError(withStatus: "Failure")
+                    }
+                    SVProgressHUD.dismiss(withDelay: 1)
+                    self?.navigateToHomeViewController()
+                }
+        }
+    }
+    
+    @IBAction func registerButtonPressed() {
+        //in the future when returning to login screen will be disabled
+        //registerButton.isEnabled = false
+        
+        //the only difference between login and register is the router which could
+        //be solved by only suplying a different router to a shared function.
+        //It is done like this because it is more customizable, for example to add an extra screen
+        //to a user that just registered for the first time etc.
+        loginOrRegisterButtonPressed(errorDescription: "Registration error") { username, password in
+            
+            let router = Router.register(
+                user: UserRegister(
+                    email: username,
+                    password: password,
+                    passwordConfirmation: password
+                )
+            )
+            NetworkService
+                .shared
+                .service
+                .request(router)
+                .validate()
+                .responseDecodable(of: LoginResponse.self) { [weak self] response in
+                    switch response.result {
+                    case .success(_):
+                        SVProgressHUD.showSuccess(withStatus: "Success")
+                    case .failure(_):
+                        SVProgressHUD.showError(withStatus: "Failure")
+                    }
+                    SVProgressHUD.dismiss(withDelay: 1)
+                    self?.navigateToHomeViewController()
+                }
+        }
+    }
+}
+
+//MARK: -UITextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if usernameTextField.text != "" && passwordTextField.text != "" && !loginButton.isEnabled {
+            
+            loginButton.isEnabled = true
+            registerButton.isEnabled = true
+            loginButton.backgroundColor = .white
+        }
+    }
+}
+
+//MARK: -Utility
+
+private extension LoginViewController {
+    
+    func makeNavigationBarClear() {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    private func setupButtons() {
+    func setupButtons() {
         loginButton.isEnabled = false
         registerButton.isEnabled = false
+        
         loginButton.layer.cornerRadius = 25
-        loginButton.setTitleColor(.lightText, for: .normal)
-        registerButton.setTitleColor(.lightText, for: .normal)
+        loginButton.setTitleColor(.lightText, for: .disabled)
+        loginButton.setTitleColor(UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1), for: .normal)
+        
+        registerButton.setTitleColor(.lightText, for: .disabled)
+        registerButton.setTitleColor(.white, for: .normal)
+        
+        rememberMeButton.setImage( UIImage(named: "ic-checkbox-unselected"), for: .normal)
+        rememberMeButton.setImage( UIImage(named: "ic-checkbox-selected"), for: .selected)
+        
+        passwordButton.setImage(UIImage(named: "visibility-icon-closed"), for: .selected)
+        passwordButton.setImage(UIImage(named: "visibility-icon-open"), for: .normal)
     }
     
-    private func setupTextFields() {
+    func setupTextFields() {
         passwordButton = UIButton()
         passwordButton.setImage(UIImage(named: "visibility-icon-open"), for: .normal)
         passwordTextField.rightViewMode = .whileEditing
         passwordTextField.rightView = passwordButton
-        passwordButton.addTarget(self, action: #selector(refreshPasswordVisibility), for: .touchUpInside)
+        passwordButton.addTarget(self, action: #selector(passwordButtonPressed), for: .touchUpInside)
         
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
         
-        emailTextField.delegate = self
+        usernameTextField.delegate = self
         passwordTextField.delegate = self
     }
     
-    @IBAction private func rememberMeAction(_ sender: Any) {
-        if rememberMeButton.tag == 0 {
-            rememberMeButton.tag = 1
-            rememberMeButton.setImage( UIImage(named: "ic-checkbox-selected"), for: .normal)
-        } else {
-            rememberMeButton.tag = 0
-            rememberMeButton.setImage( UIImage(named: "ic-checkbox-unselected"), for: .normal)
-        }
-    }
-    
-    private func navigateToHomeViewController() {
+    func navigateToHomeViewController() {
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeViewController
         self.navigationController?.pushViewController(homeVC, animated: true)
     }
     
-    
-}
-
-extension LoginViewController: UITextFieldDelegate {
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if emailTextField.text != "" && passwordTextField.text != "" {
-            //once the button becomes active it will not become inactive again
-            //even if user empties a text field
-            //delegates are removed so code doesn't run for nothing
-            emailTextField.delegate = nil
-            passwordTextField.delegate = nil
-            
-            loginButton.isEnabled = true
-            registerButton.isEnabled = true
-            
-            loginButton.backgroundColor = .white
-            let color = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)
-            loginButton.setTitleColor(color, for: .normal)
-            registerButton.setTitleColor(.white, for: .normal)
+    func loginOrRegisterButtonPressed(errorDescription: String, doWork: (_ username: String, _ password: String) -> Void) {
+        guard
+            let username = usernameTextField.text,
+            let password = passwordTextField.text,
+            !username.isEmpty,
+            !password.isEmpty
+        else {
+            let alert = UIAlertController(title: errorDescription, message: "Please enter username and password", preferredStyle: .alert)
+        
+            self.present(alert, animated: true) {
+                alert.view.superview?.isUserInteractionEnabled = true
+                alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
+            }
+            return
         }
+        
+        SVProgressHUD.show()
+        doWork(username, password)
+    }
+    
+    @objc func dismissOnTapOutside(){
+       self.dismiss(animated: true, completion: nil)
     }
 }

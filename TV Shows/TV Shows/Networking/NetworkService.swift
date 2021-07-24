@@ -9,21 +9,11 @@ import Foundation
 import Alamofire
 
 final class NetworkService {
-    let service: Session!
-    static private var instance: NetworkService?
     
+    let service: Session
+    static let shared = NetworkService()
+        
     private init() {
         service = Session.default
     }
-    
-    static func shared() -> NetworkService {
-        if instance == nil {
-            instance = NetworkService()
-        }
-        
-        //force casted because it will never be nil
-        return instance!
-    }
-    
-    
 }

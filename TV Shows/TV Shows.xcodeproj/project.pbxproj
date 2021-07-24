@@ -68,12 +68,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		427DA70426A4AAC1009A42EE /* InterfaceBuilderSubclasses */ = {
+		427DA70426A4AAC1009A42EE /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
 				427DA70626A4AB09009A42EE /* PaddingTextField.swift */,
 			);
-			path = InterfaceBuilderSubclasses;
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		42939F062697606400F8D91F = {
@@ -100,7 +100,7 @@
 				42939F26269DB80800F8D91F /* Login */,
 				42D5F97E26A86D6D00308D34 /* Home */,
 				42A5D44426A8B74500A0BA73 /* Networking */,
-				427DA70426A4AAC1009A42EE /* InterfaceBuilderSubclasses */,
+				427DA70426A4AAC1009A42EE /* UIComponents */,
 				42939F122697606400F8D91F /* AppDelegate.swift */,
 				42939F1B2697606700F8D91F /* Assets.xcassets */,
 				42939F1D2697606700F8D91F /* LaunchScreen.storyboard */,

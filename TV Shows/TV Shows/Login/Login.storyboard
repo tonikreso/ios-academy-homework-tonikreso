@@ -157,12 +157,12 @@
                     </view>
                     <connections>
                         <outlet property="emailLineView" destination="gI6-7B-mKd" id="fdP-3u-djn"/>
-                        <outlet property="emailTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
                         <outlet property="loginButton" destination="Ump-JV-CNx" id="kAD-6g-8Qz"/>
                         <outlet property="passwordLineView" destination="VgM-2r-Ogi" id="3lM-JG-D9E"/>
                         <outlet property="passwordTextField" destination="JgF-no-5Ui" id="tcB-nb-fBx"/>
                         <outlet property="registerButton" destination="mk7-2N-OCw" id="pg3-gc-5UA"/>
                         <outlet property="rememberMeButton" destination="7Xb-ny-vTs" id="tKs-d9-x9S"/>
+                        <outlet property="usernameTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
                         <outlet property="verticalStackView" destination="xl5-zP-G2K" id="zhg-3h-KDc"/>
                     </connections>
                 </viewController>

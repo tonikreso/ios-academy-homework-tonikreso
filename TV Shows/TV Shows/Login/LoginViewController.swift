@@ -10,8 +10,8 @@ import UIKit
 
 final class LoginViewController: UIViewController {
     
-    @IBOutlet private weak var verticalStackView: UIStackView!
-    @IBOutlet private weak var emailTextField: UITextField!
+    
+    @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var emailLineView: UIView!
     @IBOutlet private weak var passwordLineView: UIView!
@@ -43,9 +43,9 @@ final class LoginViewController: UIViewController {
         passwordButton.addTarget(self, action: #selector(refreshPasswordVisibility), for: .touchUpInside)
         
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
         
-        emailTextField.delegate = self
+        usernameTextField.delegate = self
         passwordTextField.delegate = self
     }
     
@@ -72,11 +72,11 @@ final class LoginViewController: UIViewController {
 extension LoginViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if emailTextField.text != "" && passwordTextField.text != "" {
+        if usernameTextField.text != "" && passwordTextField.text != "" {
             //once the button becomes active it will not become inactive again
             //even if user empties a text field
             //delegates are removed so code doesn't run for nothing
-            emailTextField.delegate = nil
+            usernameTextField.delegate = nil
             passwordTextField.delegate = nil
             
             loginButton.isEnabled = true

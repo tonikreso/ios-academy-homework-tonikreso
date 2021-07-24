@@ -76,10 +76,6 @@ private extension LoginViewController {
         //in the future when returning to login screen will be disabled
         //registerButton.isEnabled = false
         
-        //the only difference between login and register is the router which could
-        //be solved by only suplying a different router to a shared function.
-        //It is done like this because it is more customizable, for example to add an extra screen
-        //to a user that just registered for the first time etc.
         loginOrRegisterButtonPressed(errorDescription: "Registration error") { username, password in
             
             let router = Router.register(

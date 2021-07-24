@@ -173,19 +173,12 @@ private extension LoginViewController {
             !password.isEmpty
         else {
             let alert = UIAlertController(title: errorDescription, message: "Please enter username and password", preferredStyle: .alert)
-        
-            self.present(alert, animated: true) {
-                alert.view.superview?.isUserInteractionEnabled = true
-                alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
-            }
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
             return
         }
         
         SVProgressHUD.show()
         doWork(username, password)
-    }
-    
-    @objc func dismissOnTapOutside(){
-       self.dismiss(animated: true, completion: nil)
     }
 }

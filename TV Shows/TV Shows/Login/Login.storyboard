@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Vu-Tk-Gk3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,6 +9,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Jtf-yl-HA6">
+            <objects>
+                <navigationController id="1Vu-Tk-Gk3" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aLv-wW-NpW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="QA6-Mv-MwB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhy-sJ-M63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1172" y="125"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -95,7 +112,7 @@
                                                 <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="Remember me" image="ic-checkbox-unselected"/>
                                                 <connections>
-                                                    <action selector="rememberMeAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gnd-T9-TaF"/>
+                                                    <action selector="rememberMeButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gnd-T9-TaF"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-a2-CFS">
@@ -111,6 +128,9 @@
                                                         <state key="normal" title="Login">
                                                             <color key="titleColor" white="0.75082376700680276" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="loginButtonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ilf-fy-vbH"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mk7-2N-OCw">
                                                         <rect key="frame" x="0.0" y="61" width="374" height="50"/>
@@ -121,6 +141,9 @@
                                                         <state key="normal" title="Register">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="registerButtonPressed" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aUl-Vc-F0q"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -148,13 +171,17 @@
                             <constraint firstItem="87w-ev-xea" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="5R3-4I-6rL"/>
                             <constraint firstAttribute="bottom" secondItem="Y6n-3c-9Ng" secondAttribute="bottom" id="Dz5-PS-N90"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="110" id="FCN-EF-nJ8"/>
-                            <constraint firstAttribute="trailing" secondItem="87w-ev-xea" secondAttribute="trailing" id="T0G-TL-fp8"/>
+
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Vqp-uS-6eW"/>
+                            <constraint firstAttribute="trailing" secondItem="87w-ev-xea" secondAttribute="trailing" id="fBW-bk-dIg"/>
+                            <constraint firstItem="87w-ev-xea" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="jnN-IU-KZL"/>
+                            <constraint firstItem="EgU-uW-TEi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="jqo-ti-S9y"/>
                             <constraint firstItem="Y6n-3c-9Ng" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="kGc-Nr-1MG"/>
-                            <constraint firstItem="EgU-uW-TEi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="m1E-XL-6ft"/>
-                            <constraint firstItem="EgU-uW-TEi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="p7D-vZ-s5R"/>
+                            <constraint firstItem="EgU-uW-TEi" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="zig-ux-sSX"/>
+
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9mg-Nj-ZTh"/>
                     <connections>
                         <outlet property="emailLineView" destination="gI6-7B-mKd" id="fdP-3u-djn"/>
                         <outlet property="loginButton" destination="Ump-JV-CNx" id="kAD-6g-8Qz"/>
@@ -163,12 +190,11 @@
                         <outlet property="registerButton" destination="mk7-2N-OCw" id="pg3-gc-5UA"/>
                         <outlet property="rememberMeButton" destination="7Xb-ny-vTs" id="tKs-d9-x9S"/>
                         <outlet property="usernameTextField" destination="xcK-Pw-kOs" id="nU5-B7-oAj"/>
-                        <outlet property="verticalStackView" destination="xl5-zP-G2K" id="zhg-3h-KDc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23.188405797101453" y="37.5"/>
+            <point key="canvasLocation" x="-191" y="112"/>
         </scene>
     </scenes>
     <designables>

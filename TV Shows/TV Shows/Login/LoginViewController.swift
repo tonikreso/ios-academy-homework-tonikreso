@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 
 final class LoginViewController: UIViewController {
-    
+
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var emailLineView: UIView!
@@ -176,6 +176,7 @@ private extension LoginViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
             return
+
         }
         
         SVProgressHUD.show()

@@ -22,6 +22,10 @@
 		42A5D45126A8BF5D00A0BA73 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A5D45026A8BF5D00A0BA73 /* UserRegister.swift */; };
 		42D5F98026A86D8700308D34 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5F97F26A86D8700308D34 /* HomeViewController.swift */; };
 		42D5F98226A86D9F00308D34 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D5F98126A86D9F00308D34 /* Home.storyboard */; };
+		42F7EA5E26ADDF33007B8428 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7EA5D26ADDF33007B8428 /* AuthInfo.swift */; };
+		42F7EA6026ADEE87007B8428 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7EA5F26ADEE87007B8428 /* Show.swift */; };
+		42F7EA6226ADEF9F007B8428 /* ShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7EA6126ADEF9F007B8428 /* ShowsResponse.swift */; };
+		42F7EA6426ADF8AC007B8428 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7EA6326ADF8AC007B8428 /* TVShowTableViewCell.swift */; };
 		C7793222933A43922ECDADF4 /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2C1B97DBB00599CF31B986 /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,10 @@
 		42A5D45026A8BF5D00A0BA73 /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		42D5F97F26A86D8700308D34 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		42D5F98126A86D9F00308D34 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		42F7EA5D26ADDF33007B8428 /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
+		42F7EA5F26ADEE87007B8428 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		42F7EA6126ADEF9F007B8428 /* ShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsResponse.swift; sourceTree = "<group>"; };
+		42F7EA6326ADF8AC007B8428 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		59F8B03086147FC9F1BAA8EA /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		AA2C1B97DBB00599CF31B986 /* Pods_TV_Shows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_Shows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -72,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				427DA70626A4AB09009A42EE /* PaddingTextField.swift */,
+				42F7EA6326ADF8AC007B8428 /* TVShowTableViewCell.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -136,6 +145,9 @@
 				42A5D44C26A8BA8F00A0BA73 /* LoginResponse.swift */,
 				42A5D44E26A8BCCC00A0BA73 /* UserLogin.swift */,
 				42A5D45026A8BF5D00A0BA73 /* UserRegister.swift */,
+				42F7EA5D26ADDF33007B8428 /* AuthInfo.swift */,
+				42F7EA5F26ADEE87007B8428 /* Show.swift */,
+				42F7EA6126ADEF9F007B8428 /* ShowsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -280,10 +292,14 @@
 				42A5D44B26A8B8D100A0BA73 /* Router.swift in Sources */,
 				42A5D44726A8B76100A0BA73 /* UserResponse.swift in Sources */,
 				42A5D45126A8BF5D00A0BA73 /* UserRegister.swift in Sources */,
+				42F7EA6426ADF8AC007B8428 /* TVShowTableViewCell.swift in Sources */,
 				42A5D44F26A8BCCC00A0BA73 /* UserLogin.swift in Sources */,
 				42D5F98026A86D8700308D34 /* HomeViewController.swift in Sources */,
+				42F7EA6226ADEF9F007B8428 /* ShowsResponse.swift in Sources */,
 				42A5D44D26A8BA8F00A0BA73 /* LoginResponse.swift in Sources */,
+				42F7EA6026ADEE87007B8428 /* Show.swift in Sources */,
 				42A5D44926A8B7AA00A0BA73 /* LoginData.swift in Sources */,
+				42F7EA5E26ADDF33007B8428 /* AuthInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

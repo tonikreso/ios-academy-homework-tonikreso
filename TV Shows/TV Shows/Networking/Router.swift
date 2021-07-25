@@ -11,6 +11,7 @@ enum Router: URLRequestConvertible {
     
     case login(user: UserLogin)
     case register(user: UserRegister)
+    case getShows(authInfo: AuthInfo)
     
     var path: String {
         switch self {
@@ -18,6 +19,8 @@ enum Router: URLRequestConvertible {
             return "users/sign_in/"
         case .register:
             return "users/"
+        case .getShows:
+            return "shows"
         }
     }
     
@@ -25,6 +28,17 @@ enum Router: URLRequestConvertible {
         switch self {
         case .login, .register:
             return .post
+        case .getShows:
+            return .get
+        }
+    }
+    
+    var headers: [String: String] {
+        switch self {
+        case .getShows(let authInfo):
+            return authInfo.headers
+        default:
+            return [:]
         }
     }
     
@@ -41,7 +55,8 @@ enum Router: URLRequestConvertible {
                 "password" : user.password,
                 "password_confirmation" : user.passwordConfirmation
             ]
-        
+        default:
+            return [:]
         }
     }
     
@@ -53,6 +68,12 @@ enum Router: URLRequestConvertible {
             case .post, .put, .patch:
                 request = try JSONEncoding.default.encode(request, with: parameters)
             default:
+                let headers = headers
+                for header in headers {
+                    request.addValue(header.value, forHTTPHeaderField: header.key)
+                }
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
                 request = try URLEncoding.default.encode(request, with: parameters)
         }
         return request

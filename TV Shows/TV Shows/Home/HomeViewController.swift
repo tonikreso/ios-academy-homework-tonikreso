@@ -13,7 +13,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet private weak var titleLabel: UILabel!
     
     private var authInfo: AuthInfo!
-    private var items: [String] = []
+    private var items: [Show] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,9 @@ final class HomeViewController: UIViewController {
 //MARK: -UITableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigateToShowDetailsViewController(row: indexPath.row)
+    }
 }
 
 //MARK: -UITableViewDatasource
@@ -43,7 +45,7 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! TVShowTableViewCell
 
-        cell.configure(with: items[indexPath.row])
+        cell.configure(with: items[indexPath.row].title)
 
         return cell
     }
@@ -63,12 +65,10 @@ private extension HomeViewController {
             .responseDecodable(of: ShowsResponse.self) { [weak self] response in
                 switch response.result {
                 case .success(let showsResponse):
-                    for show in showsResponse.shows {
-                        self?.items.append(show.title)
-                    }
+                    self?.items = showsResponse.shows
                     self?.tableView.reloadData()
                 case .failure(let error):
-                    print(error.errorDescription)
+                    print(error.errorDescription as Any)
                 }
             }
     }
@@ -79,6 +79,14 @@ private extension HomeViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func navigateToShowDetailsViewController(row: Int) {
+        let storyboard = UIStoryboard.init(name: "ShowDetails", bundle: nil)
+        let showDetailsVC = storyboard.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
+        showDetailsVC.addShowAndAuthInfo(show: items[row], authInfo: authInfo)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)
+        self.navigationController?.show(showDetailsVC, sender: self)
     }
 }
 

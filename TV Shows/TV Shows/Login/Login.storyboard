@@ -62,7 +62,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="N98-1C-sTm">
                                                 <rect key="frame" x="0.0" y="187.5" width="374" height="36"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xcK-Pw-kOs" customClass="PaddingTextField" customModule="TV_Shows" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="toni.kreso5@email.com" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xcK-Pw-kOs" customClass="PaddingTextField" customModule="TV_Shows" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="22"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -85,7 +85,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="aO4-EE-RBi">
                                                 <rect key="frame" x="0.0" y="246.5" width="374" height="35"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JgF-no-5Ui" customClass="PaddingTextField" customModule="TV_Shows" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dobrasifra" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JgF-no-5Ui" customClass="PaddingTextField" customModule="TV_Shows" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -197,10 +197,10 @@
     </scenes>
     <designables>
         <designable name="JgF-no-5Ui">
-            <size key="intrinsicContentSize" width="97.5" height="21"/>
+            <size key="intrinsicContentSize" width="102" height="21"/>
         </designable>
         <designable name="xcK-Pw-kOs">
-            <size key="intrinsicContentSize" width="102.5" height="22"/>
+            <size key="intrinsicContentSize" width="202" height="22"/>
         </designable>
     </designables>
     <resources>

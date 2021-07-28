@@ -8,7 +8,7 @@
 struct Show: Decodable {
     let id: String
     let title: String
-    let averageRating: Int?
+    let averageRating: Double?
     let description: String?
     let imageUrl: String
     let noOfReviews: Int

@@ -60,14 +60,24 @@ private extension LoginViewController {
                 .request(router)
                 .validate()
                 .responseDecodable(of: LoginResponse.self) { [weak self] response in
-                    switch response.result {
-                    case .success(_):
-                            SVProgressHUD.showSuccess(withStatus: "Success")
-                    case .failure(_):
-                            SVProgressHUD.showError(withStatus: "Failure")
-                    }
                     SVProgressHUD.dismiss(withDelay: 1)
-                    self?.navigateToHomeViewController()
+                    switch response.result {
+                    case .success(let userResponse):
+                        let headers = response.response?.headers.dictionary ?? [:]
+                        let authInfo = self?.handleSuccesfulLoginOrRegister(for: userResponse.user, headers: headers)
+                        guard let authInfo = authInfo else {
+                            self?.showAlert(title: "Login error", message: "No authorization info in server response. Please try again.")
+                            return
+                        }
+                        self?.navigateToHomeViewController(authInfo: authInfo)
+                    case .failure(let error):
+                        switch error.responseCode {
+                        case 401:
+                            self?.showAlert(title: "Login error", message: "Wrong username or password")
+                        default:
+                            SVProgressHUD.showError(withStatus: "Failure")
+                        }
+                    }
                 }
         }
     }
@@ -91,14 +101,25 @@ private extension LoginViewController {
                 .request(router)
                 .validate()
                 .responseDecodable(of: LoginResponse.self) { [weak self] response in
-                    switch response.result {
-                    case .success(_):
-                        SVProgressHUD.showSuccess(withStatus: "Success")
-                    case .failure(_):
-                        SVProgressHUD.showError(withStatus: "Failure")
-                    }
+                    guard let self = self else { return }
                     SVProgressHUD.dismiss(withDelay: 1)
-                    self?.navigateToHomeViewController()
+                    switch response.result {
+                    case .success(let userResponse):
+                        let headers = response.response?.headers.dictionary ?? [:]
+                        let authInfo = self.handleSuccesfulLoginOrRegister(for: userResponse.user, headers: headers)
+                        guard let authInfo = authInfo else {
+                            self.showAlert(title: "Registration error", message: "No authorization info in server response. Please try again.")
+                            return
+                        }
+                        self.navigateToHomeViewController(authInfo: authInfo)
+                    case .failure(let error):
+                        switch error.responseCode {
+                        case 422:
+                            self.showAlert(title: "Registration error", message: "Invalid email or password")
+                        default:
+                            SVProgressHUD.showError(withStatus: "Failure")
+                        }
+                    }
                 }
         }
     }
@@ -159,10 +180,11 @@ private extension LoginViewController {
         passwordTextField.delegate = self
     }
     
-    func navigateToHomeViewController() {
+    func navigateToHomeViewController(authInfo: AuthInfo) {
         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
         let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeViewController
-        self.navigationController?.pushViewController(homeVC, animated: true)
+        homeVC.addAuthInfo(authInfo: authInfo)
+        self.navigationController?.setViewControllers([homeVC], animated: true)
     }
     
     func loginOrRegisterButtonPressed(errorDescription: String, doWork: (_ username: String, _ password: String) -> Void) {
@@ -178,8 +200,22 @@ private extension LoginViewController {
             return
 
         }
-        
         SVProgressHUD.show()
         doWork(username, password)
+    }
+    
+    func handleSuccesfulLoginOrRegister(for user: UserResponse, headers: [String: String]) -> AuthInfo?{
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            SVProgressHUD.showError(withStatus: "Missing headers")
+            return nil
+        }
+        SVProgressHUD.showSuccess(withStatus: "Success")
+        return authInfo
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: description, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 }

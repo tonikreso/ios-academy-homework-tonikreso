@@ -63,10 +63,11 @@ private extension HomeViewController {
             .request(router)
             .validate()
             .responseDecodable(of: ShowsResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 switch response.result {
                 case .success(let showsResponse):
-                    self?.items = showsResponse.shows
-                    self?.tableView.reloadData()
+                    self.items = showsResponse.shows
+                    self.tableView.reloadData()
                 case .failure(let error):
                     print(error.errorDescription as Any)
                 }

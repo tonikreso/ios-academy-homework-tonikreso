@@ -26,9 +26,7 @@ class ShowDetailsViewController: UIViewController {
 }
 
 extension ShowDetailsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+    
 }
 
 extension ShowDetailsViewController: UITableViewDataSource {
@@ -45,6 +43,8 @@ extension ShowDetailsViewController: UITableViewDataSource {
             ) as! ShowDetailsTableViewCellTypeOne
             
             cell.configure(descriptionText: show.description ?? "Description missing", noOfReviews: show.noOfReviews, averageReview: show.averageRating ?? 0)
+            cell.selectionStyle = .none
+            
             return cell
             
         } else {
@@ -56,6 +56,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
             let review = reviews[indexPath.row - 1]
             
             cell.configure(reviewText: review.comment, username: review.user.email, rating: review.rating)
+            cell.selectionStyle = .none
             
             return cell
         }
@@ -80,10 +81,11 @@ private extension ShowDetailsViewController {
             .request(router)
             .validate()
             .responseDecodable(of: ReviewsResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 switch response.result {
                 case .success(let reviewsResponse):
-                    self?.reviews = reviewsResponse.reviews
-                    self?.tableView.reloadData()
+                    self.reviews = reviewsResponse.reviews
+                    self.tableView.reloadData()
                 case .failure(let error):
                     print(error.errorDescription as Any)
                 }

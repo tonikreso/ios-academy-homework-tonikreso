@@ -66,14 +66,14 @@ private extension LoginViewController {
                         let headers = response.response?.headers.dictionary ?? [:]
                         let authInfo = self?.handleSuccesfulLoginOrRegister(for: userResponse.user, headers: headers)
                         guard let authInfo = authInfo else {
-                            self?.showNoAuthInfoAlert(description: "Login error")
+                            self?.showAlert(title: "Login error", message: "No authorization info in server response. Please try again.")
                             return
                         }
                         self?.navigateToHomeViewController(authInfo: authInfo)
                     case .failure(let error):
                         switch error.responseCode {
                         case 401:
-                            self?.showLoginOrRequestServerError(description: "Login error", message: "Wrong username or password")
+                            self?.showAlert(title: "Login error", message: "Wrong username or password")
                         default:
                             SVProgressHUD.showError(withStatus: "Failure")
                         }
@@ -101,20 +101,21 @@ private extension LoginViewController {
                 .request(router)
                 .validate()
                 .responseDecodable(of: LoginResponse.self) { [weak self] response in
+                    guard let self = self else { return }
                     SVProgressHUD.dismiss(withDelay: 1)
                     switch response.result {
                     case .success(let userResponse):
                         let headers = response.response?.headers.dictionary ?? [:]
-                        let authInfo = self?.handleSuccesfulLoginOrRegister(for: userResponse.user, headers: headers)
+                        let authInfo = self.handleSuccesfulLoginOrRegister(for: userResponse.user, headers: headers)
                         guard let authInfo = authInfo else {
-                            self?.showNoAuthInfoAlert(description: "Registration error")
+                            self.showAlert(title: "Registration error", message: "No authorization info in server response. Please try again.")
                             return
                         }
-                        self?.navigateToHomeViewController(authInfo: authInfo)
+                        self.navigateToHomeViewController(authInfo: authInfo)
                     case .failure(let error):
                         switch error.responseCode {
                         case 422:
-                            self?.showLoginOrRequestServerError(description: "Registration error", message: "Invalid email or password")
+                            self.showAlert(title: "Registration error", message: "Invalid email or password")
                         default:
                             SVProgressHUD.showError(withStatus: "Failure")
                         }
@@ -212,13 +213,7 @@ private extension LoginViewController {
         return authInfo
     }
     
-    func showNoAuthInfoAlert(description: String) {
-        let alert = UIAlertController(title: description, message: "No authorization info in server response. Please try again.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
-    func showLoginOrRequestServerError(description: String, message: String) {
+    func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: description, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)

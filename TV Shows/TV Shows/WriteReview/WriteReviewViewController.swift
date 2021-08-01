@@ -89,10 +89,11 @@ private extension WriteReviewViewController {
             .request(router)
             .validate()
             .responseDecodable(of: ReviewResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 switch response.result {
                 case .success(_):
                     SVProgressHUD.showSuccess(withStatus: "Success")
-                    self?.delegate?.didPostReview()
+                    self.delegate?.didPostReview()
                 case .failure(_):
                     SVProgressHUD.showError(withStatus: "Failure")
                 }

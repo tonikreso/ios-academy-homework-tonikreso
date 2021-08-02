@@ -37,7 +37,7 @@ extension ShowDetailsTableViewCellTypeTwo {
     func configure(reviewText: String, username: String, rating: Int) {
         reviewLabel.text = reviewText
         usernameLabel.text = username
-        profileImageView.image = UIImage(named: "ic-profile")
+        profileImageView.image = UIImage(named: "ic-profile-placeholder")
         ratingView.setRoundedRating(Double(rating))
     }
 }

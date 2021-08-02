@@ -42,7 +42,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                 for: indexPath
             ) as! ShowDetailsTableViewCellTypeOne
             
-            cell.configure(descriptionText: show.description ?? "Description missing", noOfReviews: show.noOfReviews, averageReview: show.averageRating ?? 0)
+            cell.configure(descriptionText: show.description ?? "Description missing", noOfReviews: show.noOfReviews, averageReview: show.averageRating ?? 0, imageUrl: show.imageUrl)
             cell.selectionStyle = .none
             
             return cell

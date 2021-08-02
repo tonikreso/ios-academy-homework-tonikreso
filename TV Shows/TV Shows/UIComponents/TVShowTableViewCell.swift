@@ -7,19 +7,23 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 final class TVShowTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var showImageView: UIImageView!
 
 // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        showImageView.layer.cornerRadius = 5
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
+        showImageView.image = UIImage()
     }
 }
 
@@ -27,7 +31,11 @@ final class TVShowTableViewCell: UITableViewCell {
 
 extension TVShowTableViewCell {
 
-    func configure(with text: String) {
+    func configure(text: String, imageUrl: String) {
         titleLabel.text = text
+        showImageView.kf.setImage(
+            with: URL(string: imageUrl),
+            placeholder: UIImage(named: "ic-show-placeholder-vertical")
+        )
     }
 }

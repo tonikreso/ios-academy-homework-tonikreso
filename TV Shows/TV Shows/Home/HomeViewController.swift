@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class HomeViewController: UIViewController {
     
@@ -45,7 +46,7 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! TVShowTableViewCell
 
-        cell.configure(with: items[indexPath.row].title)
+        cell.configure(text: items[indexPath.row].title, imageUrl: items[indexPath.row].imageUrl)
 
         return cell
     }
@@ -56,6 +57,7 @@ extension HomeViewController: UITableViewDataSource {
 private extension HomeViewController {
     
     func getShows() {
+        SVProgressHUD.show()
         let router = Router.getShows(authInfo: authInfo)
         NetworkService
             .shared
@@ -64,19 +66,21 @@ private extension HomeViewController {
             .validate()
             .responseDecodable(of: ShowsResponse.self) { [weak self] response in
                 guard let self = self else { return }
+                SVProgressHUD.dismiss(withDelay: 1)
                 switch response.result {
                 case .success(let showsResponse):
                     self.items = showsResponse.shows
                     self.tableView.reloadData()
-                case .failure(let error):
-                    print(error.errorDescription as Any)
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                case .failure(_):
+                    SVProgressHUD.showError(withStatus: "Failure")
                 }
             }
     }
     
     func setupTableView() {
-        tableView.estimatedRowHeight = 110
-        tableView.rowHeight = UITableView.automaticDimension
+        //tableView.estimatedRowHeight = 110
+        //tableView.rowHeight = UITableView.automaticDimension
 
         tableView.delegate = self
         tableView.dataSource = self

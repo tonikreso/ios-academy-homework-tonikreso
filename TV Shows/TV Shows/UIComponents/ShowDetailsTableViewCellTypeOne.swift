@@ -15,12 +15,14 @@ final class ShowDetailsTableViewCellTypeOne: UITableViewCell {
     @IBOutlet weak var reviewLabel: UILabel!
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var showImageView: UIImageView!
+    @IBOutlet weak var ratingViewHeightConstraint: NSLayoutConstraint!
     
 
 // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         ratingView.isEnabled = false
+        showImageView.layer.cornerRadius = 10
     }
 
     override func prepareForReuse() {
@@ -28,7 +30,6 @@ final class ShowDetailsTableViewCellTypeOne: UITableViewCell {
         descriptionLabel.text = nil
         numberOfReviewsLabel.text = nil
         reviewLabel.text = nil
-        showImageView.image = nil
     }
 }
 
@@ -36,11 +37,22 @@ final class ShowDetailsTableViewCellTypeOne: UITableViewCell {
 
 extension ShowDetailsTableViewCellTypeOne {
 
-    func configure(descriptionText: String, noOfReviews: Int, averageReview: Double) {
+    func configure(descriptionText: String, noOfReviews: Int, averageReview: Double, imageUrl: String) {
         descriptionLabel.text = descriptionText
-        numberOfReviewsLabel.text = "\(noOfReviews) reviews, \(averageReview) average rating"
+        if noOfReviews == 0 {
+            numberOfReviewsLabel.text = "No reviews yet"
+            numberOfReviewsLabel.textAlignment = .center
+        } else {
+            numberOfReviewsLabel.text = "\(noOfReviews) reviews, \(averageReview) average rating"
+            numberOfReviewsLabel.textAlignment = .natural
+            ratingViewHeightConstraint.constant = 50
+        }
+        
         reviewLabel.text = "Review"
-        showImageView.image = UIImage(named: "splash-top-left")
+        showImageView.kf.setImage(
+            with: URL(string: imageUrl),
+            placeholder: UIImage(named: "ic-show-placeholder-rectangle")
+        )
         ratingView.setRoundedRating(averageReview)
     }
 }

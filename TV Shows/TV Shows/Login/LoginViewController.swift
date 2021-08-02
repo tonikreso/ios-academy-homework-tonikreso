@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 import SVProgressHUD
+import KeychainAccess
 
 final class LoginViewController: UIViewController {
 
+    @IBOutlet private weak var instructionLabel: UILabel!
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var emailLineView: UIView!
@@ -18,14 +20,52 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
-    
+    private var emailLineConstraint: NSLayoutConstraint!
+    private var passwordLineConstraint: NSLayoutConstraint!
     private var passwordButton: UIButton!
+    private let instructionText = "In order to continue please log in."
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeNavigationBarClear()
         setupTextFields()
         setupButtons()
+        setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        passwordLineConstraint.isActive = true
+        emailLineConstraint.isActive = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //kind of looks glitchy on simulator
+        for (index, character) in instructionText.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(index)) { [weak self] in
+                guard let self = self else { return }
+                if index != 0 {
+                    self.instructionLabel.text!.removeLast()
+                }
+                self.instructionLabel.text!.append(character)
+                if index < self.instructionText.count - 1 {
+                    self.instructionLabel.text?.append("_")
+                }
+            }
+        }
+    
+        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseInOut , animations: { [weak self] in
+            guard let self = self else { return }
+            self.emailLineConstraint.isActive = false
+            self.emailLineView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+            self.view.layoutIfNeeded()
+                })
+        
+        UIView.animate(withDuration: 1.5, delay: 0.75, options: .curveEaseInOut , animations: { [weak self] in
+            guard let self = self else { return }
+            self.passwordLineConstraint.isActive = false
+            self.passwordLineView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+            self.view.layoutIfNeeded()
+                })
     }
 }
 
@@ -43,8 +83,8 @@ private extension LoginViewController {
     }
     
     @IBAction func loginButtonPressed() {
-        //in the future when returning to login screen will be disabled
         //loginButton.isEnabled = false
+        //loginButton.is
         
         loginOrRegisterButtonPressed(errorDescription: "Login error") { username, password in
             
@@ -60,7 +100,6 @@ private extension LoginViewController {
                 .request(router)
                 .validate()
                 .responseDecodable(of: LoginResponse.self) { [weak self] response in
-                    SVProgressHUD.dismiss(withDelay: 1)
                     switch response.result {
                     case .success(let userResponse):
                         let headers = response.response?.headers.dictionary ?? [:]
@@ -83,7 +122,6 @@ private extension LoginViewController {
     }
     
     @IBAction func registerButtonPressed() {
-        //in the future when returning to login screen will be disabled
         //registerButton.isEnabled = false
         
         loginOrRegisterButtonPressed(errorDescription: "Registration error") { username, password in
@@ -142,11 +180,6 @@ extension LoginViewController: UITextFieldDelegate {
 //MARK: -Utility
 
 private extension LoginViewController {
-    
-    func makeNavigationBarClear() {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-    }
     
     func setupButtons() {
         loginButton.isEnabled = false
@@ -209,7 +242,9 @@ private extension LoginViewController {
             SVProgressHUD.showError(withStatus: "Missing headers")
             return nil
         }
-        SVProgressHUD.showSuccess(withStatus: "Success")
+        if rememberMeButton.isSelected {
+            saveUserInfoLocally(authInfo)
+        }
         return authInfo
     }
     
@@ -217,5 +252,19 @@ private extension LoginViewController {
         let alert = UIAlertController(title: description, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
+    }
+    
+    func setupConstraints() {
+        passwordLineConstraint = passwordLineView.trailingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        emailLineConstraint = emailLineView.trailingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+    }
+    
+    func saveUserInfoLocally(_ authInfo: AuthInfo) {
+        let keychain = Keychain(service: "userInfo")
+        keychain["accessToken"] = authInfo.accessToken
+        keychain["client"] = authInfo.client
+        keychain["tokenType"] = authInfo.tokenType
+        keychain["expiry"] = authInfo.expiry
+        keychain["uid"] = authInfo.uid
     }
 }

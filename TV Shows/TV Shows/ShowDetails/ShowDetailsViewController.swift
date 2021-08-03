@@ -14,10 +14,11 @@ class ShowDetailsViewController: UIViewController {
     private var reviews: [Review] = []
     private var show: Show!
     private var authInfo: AuthInfo!
-
+    private var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        buildRefreshControl()
         setupTableView()
         getReviews()
         addReviewButton.layer.cornerRadius = 25
@@ -86,8 +87,12 @@ private extension ShowDetailsViewController {
                 case .success(let reviewsResponse):
                     self.reviews = reviewsResponse.reviews
                     self.tableView.reloadData()
-                case .failure(let error):
-                    print(error.errorDescription as Any)
+                case .failure(_):
+                    break
+                    //print(error.errorDescription as Any)
+                }
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
                 }
             }
     }
@@ -98,6 +103,17 @@ private extension ShowDetailsViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.refreshControl = refreshControl
+    }
+    
+    func buildRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.refreshReviews), for: .valueChanged)
+    }
+    
+    @objc func refreshReviews(_ sender: AnyObject) {
+        self.getReviews()
     }
 }
 

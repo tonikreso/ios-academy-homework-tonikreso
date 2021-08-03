@@ -21,7 +21,7 @@
                                 <rect key="frame" x="10" y="44" width="394" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="By9-07-btW">
-                                    <rect key="frame" x="0.0" y="741.00000034679067" width="394" height="50"/>
+                                    <rect key="frame" x="0.0" y="791.50000034679067" width="394" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -37,14 +37,14 @@
                                 </button>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowDetailsTableViewCellTypeOne" id="183-Jr-8sO" customClass="ShowDetailsTableViewCellTypeOne" customModule="TV_Shows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="394" height="567"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="394" height="617.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="183-Jr-8sO" id="NfF-TW-TKu">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="567"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="617.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="JTH-LW-p5k">
-                                                    <rect key="frame" x="0.0" y="10" width="394" height="547"/>
+                                                    <rect key="frame" x="0.0" y="10" width="394" height="597.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-top-left" translatesAutoresizingMaskIntoConstraints="NO" id="Y8Z-NJ-g0I">
                                                             <rect key="frame" x="0.0" y="0.0" width="394" height="390"/>
@@ -53,30 +53,27 @@
                                                                 <constraint firstAttribute="height" constant="390" id="zI5-K2-9Y7"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEK-5w-5yZ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEK-5w-5yZ">
                                                             <rect key="frame" x="0.0" y="409" width="394" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoB-9i-9sM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoB-9i-9sM">
                                                             <rect key="frame" x="0.0" y="448.5" width="394" height="39.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFX-K2-pB5">
-                                                            <rect key="frame" x="0.0" y="507" width="394" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFX-K2-pB5">
+                                                            <rect key="frame" x="0.0" y="507" width="394" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIr-Uy-K3Q" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="547" width="394" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="546.5" width="394" height="51"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" id="kUZ-lR-EYT"/>
-                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -92,13 +89,12 @@
                                             <outlet property="descriptionLabel" destination="vEK-5w-5yZ" id="duf-Xe-O7Z"/>
                                             <outlet property="numberOfReviewsLabel" destination="EFX-K2-pB5" id="uNk-tN-8Tz"/>
                                             <outlet property="ratingView" destination="gIr-Uy-K3Q" id="NkB-dn-q0S"/>
-                                            <outlet property="ratingViewHeightConstraint" destination="kUZ-lR-EYT" id="rWl-ZF-cr2"/>
                                             <outlet property="reviewLabel" destination="DoB-9i-9sM" id="4kw-ch-Flz"/>
                                             <outlet property="showImageView" destination="Y8Z-NJ-g0I" id="g4G-tW-2Vn"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowDetailsTableViewCellTypeTwo" id="Pbh-La-rOB" customClass="ShowDetailsTableViewCellTypeTwo" customModule="TV_Shows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="591.5" width="394" height="125"/>
+                                        <rect key="frame" x="0.0" y="642" width="394" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pbh-La-rOB" id="etR-b8-wzh">
                                             <rect key="frame" x="0.0" y="0.0" width="394" height="125"/>

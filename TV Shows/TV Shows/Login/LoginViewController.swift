@@ -112,6 +112,7 @@ private extension LoginViewController {
                         switch error.responseCode {
                         case 401:
                             self?.showAlert(title: "Login error", message: "Wrong username or password")
+                            SVProgressHUD.dismiss()
                         default:
                             SVProgressHUD.showError(withStatus: "Failure")
                         }
@@ -153,6 +154,7 @@ private extension LoginViewController {
                         switch error.responseCode {
                         case 422:
                             self.showAlert(title: "Registration error", message: "Invalid email or password")
+                            SVProgressHUD.dismiss()
                         default:
                             SVProgressHUD.showError(withStatus: "Failure")
                         }
@@ -248,7 +250,7 @@ private extension LoginViewController {
     }
     
     func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: description, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }

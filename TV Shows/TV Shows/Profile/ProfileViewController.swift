@@ -33,10 +33,13 @@ class ProfileViewController: UIViewController {
 
 private extension ProfileViewController {
     
-    func setupProfile(name: String, imageUrl: String) {
-        nameLabel.text = name
+    func setupProfile(user: UserResponse) {
+        print("imageUrl -> \(String(describing: user.imageUrl))")
+        profileInfo = user
+        
+        nameLabel.text = profileInfo.email
         profileImageView.kf.setImage(
-            with: URL(string: imageUrl),
+            with: URL(string: profileInfo.imageUrl ?? ""),
             placeholder: UIImage(named: "ic-profile-placeholder")
         )
     }
@@ -52,8 +55,7 @@ private extension ProfileViewController {
                 guard let self = self else { return }
                 switch response.result {
                 case .success(let profileResponse):
-                    self.setupProfile(name: profileResponse.user.email, imageUrl: profileResponse.user.imageUrl ?? "")
-                    self.profileInfo = profileResponse.user
+                    self.setupProfile(user: profileResponse.user)
                 case .failure(_):
                     break
                 }
@@ -73,6 +75,23 @@ private extension ProfileViewController {
           )
         
         self.title = "My Account"
+    }
+    
+    func changeImageUrl(imageUrl: String) {
+        let router = Router.putNewImageUrl(
+            authInfo: authInfo,
+            imageUrl: imageUrl,
+            email: profileInfo.email
+        )
+        
+        NetworkService
+            .shared
+            .service
+            .request(router)
+            .validate()
+            .responseDecodable(of: LoginResponse.self) { response in
+            //print(response)
+            }
     }
 }
 
@@ -132,6 +151,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
                     mimeType: "image/jpg"
                 )
                 
+                print(imageData.count)
+                
                 let headers: HTTPHeaders = [
                     "client": self.authInfo.client,
                     "access-token": self.authInfo.accessToken,
@@ -140,7 +161,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
                     "Content-Disposition" : "form-data"
                 ]
                 let url = "https://tv-shows.infinum.academy/users"
-                print(headers)
                 AF
                     .upload(
                         multipartFormData: requestData,
@@ -148,8 +168,13 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
                         method: .put,
                         headers: headers)
                     .validate()
-                    .responseDecodable(of: LoginResponse.self) { response in
-                        print(response)
+                    .responseDecodable(of: LoginResponse.self) { [weak self] response in
+                        switch response.result {
+                        case .success(let user):
+                            self?.changeImageUrl(imageUrl: user.user.imageUrl ?? "")
+                        case .failure(_):
+                            break
+                        }
                     }
             }
         }

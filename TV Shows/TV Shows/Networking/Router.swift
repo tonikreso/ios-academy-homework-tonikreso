@@ -15,12 +15,13 @@ enum Router: URLRequestConvertible {
     case getReviews(showId: String, authInfo: AuthInfo)
     case postReview(review: CreateReview, authInfo: AuthInfo)
     case getMe(authInfo: AuthInfo)
+    case putNewImageUrl(authInfo: AuthInfo, imageUrl: String, email: String)
     
     var path: String {
         switch self {
         case .login:
             return "users/sign_in/"
-        case .register:
+        case .register, .putNewImageUrl:
             return "users/"
         case .getShows:
             return "shows"
@@ -40,12 +41,14 @@ enum Router: URLRequestConvertible {
             return .post
         case .getShows, .getReviews, .getMe:
             return .get
+        case .putNewImageUrl:
+            return .put
         }
     }
     
     var headers: [String: String] {
         switch self {
-        case .getShows(let authInfo), .getReviews(_, let authInfo), .postReview(_, let authInfo), .getMe(let authInfo):
+        case .getShows(let authInfo), .getReviews(_, let authInfo), .postReview(_, let authInfo), .getMe(let authInfo), .putNewImageUrl(let authInfo, _, _):
             return authInfo.headers
         case .login, .register:
             return [:]
@@ -70,6 +73,11 @@ enum Router: URLRequestConvertible {
                 "rating": review.rating,
                 "comment": review.comment,
                 "show_id": review.showId
+            ]
+        case .putNewImageUrl(_, let imageUrl, let email):
+            return [
+                "email": email,
+                "image_url": imageUrl
             ]
         case .getShows, .getReviews, .getMe:
             return [:]

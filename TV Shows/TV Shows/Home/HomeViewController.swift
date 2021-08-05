@@ -15,12 +15,18 @@ final class HomeViewController: UIViewController {
     
     private var authInfo: AuthInfo!
     private var items: [Show] = []
+    private var notificationToken: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         getShows()
-        // Do any additional setup after loading the view.
+        setupProfileDetailsItem()
+        subscribeToLogoutNotification()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(notificationToken!)
     }
 }
 
@@ -28,6 +34,7 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         navigateToShowDetailsViewController(row: indexPath.row)
     }
 }
@@ -90,9 +97,47 @@ private extension HomeViewController {
         let storyboard = UIStoryboard.init(name: "ShowDetails", bundle: nil)
         let showDetailsVC = storyboard.instantiateViewController(withIdentifier: "ShowDetailsVC") as! ShowDetailsViewController
         showDetailsVC.addShowAndAuthInfo(show: items[row], authInfo: authInfo)
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = .primary
         self.navigationController?.show(showDetailsVC, sender: self)
     }
+    
+    @objc func profileDetailsActionHandler() {
+        let storyboard = UIStoryboard.init(name: "Profile", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileViewController
+        profileVC.addAuthInfo(authInfo: authInfo)
+        let navigationController = UINavigationController(rootViewController:
+        profileVC)
+        navigationController.navigationBar.tintColor = .primary
+        present(navigationController, animated: true)
+    }
+    
+    func setupProfileDetailsItem() {
+        let profileDetailsItem = UIBarButtonItem(
+            image: UIImage(named: "ic-profile"),
+            style: .plain,
+            target: self,
+            action: #selector(profileDetailsActionHandler)
+        )
+        profileDetailsItem.tintColor = .primary
+        navigationItem.rightBarButtonItem = profileDetailsItem
+    }
+    
+    func subscribeToLogoutNotification() {
+        notificationToken = NotificationCenter .default
+        .addObserver(
+            forName: Notification.Name(rawValue: "Logout"),
+            object: nil,
+            queue: nil,
+            using: { [weak self] _ in
+                guard let self = self else { return }
+                let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+                self.navigationController?.setViewControllers([loginViewController], animated:
+               true)
+            }
+        )
+    }
+    
 }
 
 //MARK: -Public Utility

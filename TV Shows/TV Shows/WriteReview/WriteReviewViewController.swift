@@ -24,30 +24,10 @@ class WriteReviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Close",
-            style: .plain,
-            target: self,
-            action: #selector(didSelectClose)
-          )
-        
+        setupNavigationLook()
         setupSubmitButton()
-        
         ratingView.delegate = self
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 private extension WriteReviewViewController {
@@ -60,6 +40,17 @@ private extension WriteReviewViewController {
     
     @objc func didSelectClose(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func setupNavigationLook() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Close",
+            style: .plain,
+            target: self,
+            action: #selector(didSelectClose)
+          )
+        
+        self.title = "Write a review"
     }
 }
 

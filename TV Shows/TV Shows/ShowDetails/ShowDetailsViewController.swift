@@ -22,7 +22,6 @@ class ShowDetailsViewController: UIViewController {
         setupTableView()
         getReviews()
         addReviewButton.layer.cornerRadius = 25
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -56,7 +55,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
             
             let review = reviews[indexPath.row - 1]
             
-            cell.configure(reviewText: review.comment, username: review.user.email, rating: review.rating)
+            cell.configure(reviewText: review.comment, username: review.user.email, rating: review.rating, imageUrl: review.user.imageUrl ?? "")
             cell.selectionStyle = .none
             
             return cell
@@ -128,8 +127,7 @@ private extension ShowDetailsViewController {
         writeReviewVC.delegate = self
         let navigationController = UINavigationController(rootViewController:
         writeReviewVC)
-        navigationController.title = "Write a review"
-        navigationController.navigationBar.tintColor = UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1)
+        navigationController.navigationBar.tintColor = .primary
         present(navigationController, animated: true)
     }
 }

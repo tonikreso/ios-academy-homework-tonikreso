@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420E266D26B96FB200CE7186 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E266C26B96FB200CE7186 /* UIColorExtension.swift */; };
+		420E267026B970C100CE7186 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 420E266F26B970C100CE7186 /* Profile.storyboard */; };
+		420E267226B970D100CE7186 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420E267126B970D100CE7186 /* ProfileViewController.swift */; };
 		422674F626A9F97E00B02AFC /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422674F526A9F97E00B02AFC /* NetworkService.swift */; };
 		4232A11B26B131520044B601 /* WriteReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4232A11A26B131520044B601 /* WriteReview.storyboard */; };
 		4232A11D26B1343F0044B601 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4232A11C26B1343F0044B601 /* WriteReviewViewController.swift */; };
@@ -42,6 +45,9 @@
 
 /* Begin PBXFileReference section */
 		26B46AC91ACD39516E670930 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
+		420E266C26B96FB200CE7186 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		420E266F26B970C100CE7186 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		420E267126B970D100CE7186 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		422674F526A9F97E00B02AFC /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4232A11A26B131520044B601 /* WriteReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteReview.storyboard; sourceTree = "<group>"; };
 		4232A11C26B1343F0044B601 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +104,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		420E266B26B96F8F00CE7186 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				420E266C26B96FB200CE7186 /* UIColorExtension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		420E266E26B970B200CE7186 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				420E266F26B970C100CE7186 /* Profile.storyboard */,
+				420E267126B970D100CE7186 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		4232A11926B130F40044B601 /* WriteReview */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +163,8 @@
 		42939F112697606400F8D91F /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				420E266E26B970B200CE7186 /* Profile */,
+				420E266B26B96F8F00CE7186 /* Utils */,
 				4232A11926B130F40044B601 /* WriteReview */,
 				42962A3726B1036600FA0E94 /* ShowDetails */,
 				42939F26269DB80800F8D91F /* Login */,
@@ -283,6 +308,7 @@
 				42939F1C2697606700F8D91F /* Assets.xcassets in Resources */,
 				42D5F98226A86D9F00308D34 /* Home.storyboard in Resources */,
 				42962A3926B1037C00FA0E94 /* ShowDetails.storyboard in Resources */,
+				420E267026B970C100CE7186 /* Profile.storyboard in Resources */,
 				42939F28269DB82A00F8D91F /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,6 +372,7 @@
 				42A5D44B26A8B8D100A0BA73 /* Router.swift in Sources */,
 				42A5D44726A8B76100A0BA73 /* UserResponse.swift in Sources */,
 				42A5D45126A8BF5D00A0BA73 /* UserRegister.swift in Sources */,
+				420E267226B970D100CE7186 /* ProfileViewController.swift in Sources */,
 				42F7EA6426ADF8AC007B8428 /* TVShowTableViewCell.swift in Sources */,
 				42962A3F26B108D500FA0E94 /* ShowDetailsTableViewCellTypeTwo.swift in Sources */,
 				42A5D44F26A8BCCC00A0BA73 /* UserLogin.swift in Sources */,
@@ -353,6 +380,7 @@
 				42D5F98026A86D8700308D34 /* HomeViewController.swift in Sources */,
 				42962A4126B112B000FA0E94 /* ReviewsResponse.swift in Sources */,
 				4232A11D26B1343F0044B601 /* WriteReviewViewController.swift in Sources */,
+				420E266D26B96FB200CE7186 /* UIColorExtension.swift in Sources */,
 				42F7EA6226ADEF9F007B8428 /* ShowsResponse.swift in Sources */,
 				42A5D44D26A8BA8F00A0BA73 /* LoginResponse.swift in Sources */,
 				42F7EA6026ADEE87007B8428 /* Show.swift in Sources */,

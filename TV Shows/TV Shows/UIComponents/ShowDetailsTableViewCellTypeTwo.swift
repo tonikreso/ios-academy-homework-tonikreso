@@ -20,6 +20,7 @@ final class ShowDetailsTableViewCellTypeTwo: UITableViewCell {
         super.awakeFromNib()
         ratingView.isEnabled = false
         ratingView.configure(withStyle: .small)
+        profileImageView.layer.cornerRadius = 25
     }
 
     override func prepareForReuse() {
@@ -34,10 +35,12 @@ final class ShowDetailsTableViewCellTypeTwo: UITableViewCell {
 
 extension ShowDetailsTableViewCellTypeTwo {
 
-    func configure(reviewText: String, username: String, rating: Int) {
+    func configure(reviewText: String, username: String, rating: Int, imageUrl: String) {
         reviewLabel.text = reviewText
         usernameLabel.text = username
-        profileImageView.image = UIImage(named: "ic-profile-placeholder")
+        profileImageView.kf.setImage(with: URL(string: imageUrl),
+                                     placeholder: UIImage(named: "ic-profile-placeholder")
+        )
         ratingView.setRoundedRating(Double(rating))
     }
 }

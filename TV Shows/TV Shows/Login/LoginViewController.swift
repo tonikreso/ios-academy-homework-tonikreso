@@ -84,7 +84,6 @@ private extension LoginViewController {
     
     @IBAction func loginButtonPressed() {
         //loginButton.isEnabled = false
-        //loginButton.is
         
         loginOrRegisterButtonPressed(errorDescription: "Login error") { username, password in
             
@@ -187,7 +186,7 @@ private extension LoginViewController {
         
         loginButton.layer.cornerRadius = 25
         loginButton.setTitleColor(.lightText, for: .disabled)
-        loginButton.setTitleColor(UIColor(red: 82/255, green: 54/255, blue: 140/255, alpha: 1), for: .normal)
+        loginButton.setTitleColor(.primary, for: .normal)
         
         registerButton.setTitleColor(.lightText, for: .disabled)
         registerButton.setTitleColor(.white, for: .normal)

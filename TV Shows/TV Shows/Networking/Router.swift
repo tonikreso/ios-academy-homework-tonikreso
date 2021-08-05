@@ -14,6 +14,7 @@ enum Router: URLRequestConvertible {
     case getShows(authInfo: AuthInfo)
     case getReviews(showId: String, authInfo: AuthInfo)
     case postReview(review: CreateReview, authInfo: AuthInfo)
+    case getMe(authInfo: AuthInfo)
     
     var path: String {
         switch self {
@@ -25,8 +26,11 @@ enum Router: URLRequestConvertible {
             return "shows"
         case .getReviews(let showId, _):
             return "shows/\(showId)/reviews"
-        case.postReview:
+        case .postReview:
             return "reviews/"
+        case .getMe:
+            return "users/me"
+            
         }
     }
     
@@ -34,14 +38,14 @@ enum Router: URLRequestConvertible {
         switch self {
         case .login, .register, .postReview:
             return .post
-        case .getShows, .getReviews:
+        case .getShows, .getReviews, .getMe:
             return .get
         }
     }
     
     var headers: [String: String] {
         switch self {
-        case .getShows(let authInfo), .getReviews(_, let authInfo), .postReview(_, let authInfo):
+        case .getShows(let authInfo), .getReviews(_, let authInfo), .postReview(_, let authInfo), .getMe(let authInfo):
             return authInfo.headers
         case .login, .register:
             return [:]
@@ -67,7 +71,7 @@ enum Router: URLRequestConvertible {
                 "comment": review.comment,
                 "show_id": review.showId
             ]
-        case .getShows, .getReviews:
+        case .getShows, .getReviews, .getMe:
             return [:]
         }
     }
@@ -84,7 +88,6 @@ enum Router: URLRequestConvertible {
             case .post, .put, .patch:
                 request = try JSONEncoding.default.encode(request, with: parameters)
             default:
-                
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
                 request = try URLEncoding.default.encode(request, with: parameters)

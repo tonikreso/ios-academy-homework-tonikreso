@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shows" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNb-gw-FjC">
-                                <rect key="frame" x="15" y="0.0" width="95" height="36"/>
+                                <rect key="frame" x="15" y="44" width="95" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8C1-1d-HvY">
-                                <rect key="frame" x="0.0" y="38" width="414" height="824"/>
+                                <rect key="frame" x="0.0" y="82" width="414" height="780"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TVShowTableViewCell" rowHeight="125" id="sPC-IS-iZS" customClass="TVShowTableViewCell" customModule="TV_Shows" customModuleProvider="target">
@@ -66,13 +66,14 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ExA-BN-Xx8"/>
                         <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ExA-BN-Xx8" firstAttribute="bottom" secondItem="8C1-1d-HvY" secondAttribute="bottom" id="8rz-fM-8ya"/>
                             <constraint firstItem="bNb-gw-FjC" firstAttribute="leading" secondItem="OjP-xx-mFK" secondAttribute="leading" constant="15" id="P64-fW-L8h"/>
                             <constraint firstItem="8C1-1d-HvY" firstAttribute="leading" secondItem="ExA-BN-Xx8" secondAttribute="leading" id="RgR-5v-0Fq"/>
                             <constraint firstItem="ExA-BN-Xx8" firstAttribute="trailing" secondItem="8C1-1d-HvY" secondAttribute="trailing" id="XIA-H6-TDZ"/>
                             <constraint firstItem="8C1-1d-HvY" firstAttribute="top" secondItem="bNb-gw-FjC" secondAttribute="bottom" constant="2" id="jhS-Q8-e1Z"/>
-                            <constraint firstItem="bNb-gw-FjC" firstAttribute="top" secondItem="ExA-BN-Xx8" secondAttribute="top" constant="-44" id="yg4-RC-zaZ"/>
+                            <constraint firstItem="bNb-gw-FjC" firstAttribute="top" secondItem="ExA-BN-Xx8" secondAttribute="top" id="yg4-RC-zaZ"/>
                         </constraints>
                     </view>
                     <connections>

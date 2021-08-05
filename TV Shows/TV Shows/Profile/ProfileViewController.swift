@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import KeychainAccess
 import Alamofire
+import Photos
 
 class ProfileViewController: UIViewController {
     
@@ -109,10 +110,27 @@ extension ProfileViewController {
 private extension ProfileViewController {
     
     @IBAction func changeProfilePhotoButtonPressed(_ sender: Any) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-                
-        present(imagePicker, animated: true, completion: nil)
+        
+        self.imagePicker.allowsEditing = false
+        self.imagePicker.sourceType = .photoLibrary
+        
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined{
+            PHPhotoLibrary.requestAuthorization() {[weak self] status in
+                    guard let self = self else { return }
+                    if status == .authorized{
+                        DispatchQueue.main.async {
+                            self.present(self.imagePicker, animated: true, completion: nil)
+                        }
+                    }
+                }
+        } else if photos == .denied {
+            let alert = UIAlertController(title: "Gallery Access", message: "In order to continue, please give permission to access photo gallery", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        } else {
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {

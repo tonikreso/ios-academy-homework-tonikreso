@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
         getProfileInfo()
         logoutButton.layer.cornerRadius = 25
         profileImageView.layer.cornerRadius = 50
+        profileImageView.image = UIImage(named: "ic-profile-placeholder")
         setupNavigationLook()
         imagePicker.delegate = self
     }
